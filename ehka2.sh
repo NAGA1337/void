@@ -106,32 +106,11 @@ clear
 # Detect if we're in UEFI or legacy mode installation
 [ -d /sys/firmware/efi ] && UEFI=1
 
-###### PARTITIONS - START ######
-# Device Paritioning for UEFI/GPT or BIOS/MBR
-# if [ $UEFI ]; then
-#   sfdisk $DEVNAME <<-EOF
-#     label: gpt
-#     ,$EFISIZE,U,*
-#     ,$SWAPSIZE,S
-#     ,$BOOTSIZE,L
-#     ,$ROOTSIZE,L
-#     ,,L
-#   EOF
-# else
-#   sfdisk $DEVNAME <<-EOF
-#     label: dos
-#     ,$SWAPSIZE,S
-#     ,$BOOTSIZE,L,*
-#     ,,L
-#   EOF
-# fi
-
 sfdisk $DEVNAME <<EOF
   label: gpt
   ,${EFISIZE},U,*
   ,${SWAPSIZE},S
   ,${ROOTSIZE},L
-  ,,L
 EOF
 ###### PARTITIONS - END ######
 
