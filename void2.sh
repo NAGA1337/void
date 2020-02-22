@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Name: Void Linux Installer
-# Authors: Marcílio Nascimento <marcilio.mcn at gmail.com>
-# First Release: 2019, March
-# Description: Alternative LEAN install script that replaces the standard Void Linux installer.
-# License: MIT
-# Version: 202002.02
 
 # Exit immediately if a command exits with a non-zero exit status
 set -e
@@ -33,9 +27,9 @@ REPO='http://alpha.de.repo.voidlinux.org'
 
 # PARTITIONS SIZE (M for Megabytes, G for Gigabytes)
 EFISIZE='1G'
-SWAPSIZE='10G'
+SWAPSIZE='30G'
 # BOOTSIZE='512M' # 512MB for /boot should be sufficient to host 7 to 8 kernel versions
-ROOTSIZE='10G'
+ROOTSIZE='400G'
 
 # LVM Size ARRAY (testing)
 # LV[root]="2G"
