@@ -35,7 +35,7 @@ SWAPSIZE='32G'
 
 # SETTINGS
 USERNAME='wompsi' # Set your username
-HOSTNAME='voidi' # Pick your favorite name
+HOSTNAME='void666' # Pick your favorite name
 HARDWARECLOCK='UTC' # Set RTC (Real Time Clock) to UTC or localtime
 TIMEZONE='Europe/Helsinki' # Set which region on Earth the user is
 KEYMAP='fi' # Define keyboard layout: us or br-abnt2 (include more options)
