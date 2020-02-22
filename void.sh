@@ -1,12 +1,3 @@
-#!/bin/bash
-
-# Name: Void Linux Installer
-# Authors: Marcílio Nascimento <marcilio.mcn at gmail.com>
-# First Release: 2019, March
-# Description: Alternative LEAN install script that replaces the standard Void Linux installer.
-# License: MIT
-# Version: 202002.02
-
 # Exit immediately if a command exits with a non-zero exit status
 set -e
 
