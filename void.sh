@@ -267,7 +267,7 @@ clear
 echo ''
 echo 'Installing Void Linux files'
 echo ''
-env XBPS_ARCH=x86_64 xbps-install -Sy -R ${REPO}/currentl -r /mnt $PKG_LIST
+env XBPS_ARCH=x86_64 xbps-install -Sy -R ${REPO}/current -r /mnt $PKG_LIST
 
 # Upon completion of the install, we set up our chroot jail, and chroot into our mounted filesystem:
 mount -t proc proc /mnt/proc
@@ -446,7 +446,7 @@ done
 
 echo '%wheel ALL=(ALL) ALL, NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/shutdown, /usr/bin/zzz, /usr/bin/ZZZ, /usr/bin/mount, /usr/bin/umount' > /etc/sudoers.d/99_wheel
 
-echo 'repository=${REPO}/currentl' > /etc/xbps.d/00-repository-main.conf
+echo 'repository=${REPO}/current' > /etc/xbps.d/00-repository-main.conf
 xbps-install -Su
 
 mkdir /etc/sysctl.d/
