@@ -29,7 +29,7 @@ REPO='http://alpha.de.repo.voidlinux.org'
 EFISIZE='1G'
 SWAPSIZE='4G'
 # BOOTSIZE='512M' # 512MB for /boot should be sufficient to host 7 to 8 kernel versions
-ROOTSIZE='10G'
+ROOTSIZE='20G'
 
 # LVM Size ARRAY (testing)
 # LV[root]="2G"
@@ -120,12 +120,10 @@ EOF
 mkfs.vfat -F 32 -n EFI /dev/nvme0n1p1
 mkswap -L swp0 /dev/nvme0n1p2
 mkfs.$FSYS -L voidlinux /dev/nvme0n1p3
-mkfs.$FSYS -L home /dev/nvme0n1p4
 
 # MOUNTING
 mount /dev/nvme0n1p3 /mnt
 mkdir /mnt/boot && mount /dev/nvme0n1p1 /mnt/boot
-mkdir /mnt/home && mount /dev/nvme0n1p4 /mnt/home
 
 # When UEFI
 mkdir /mnt/boot/efi && mount /dev/nvme0n1p1 /mnt/boot/efi
@@ -308,9 +306,8 @@ echo 'Generating /etc/fstab'
 cat > /mnt/etc/fstab <<EOF
 tmpfs /tmp  tmpfs defaults,nosuid,nodev 0 0
 $(blkid /dev/nvme0n1p1 | cut -d ' ' -f 4 | tr -d '"') /boot vfat  rw,fmask=0133,dmask=0022,noatime,discard  0 2
-$(blkid /dev/nvme0n1p2 | cut -d ' ' -f 3 | tr -d '"') swap  swap  commit=60,barrier=0  0 0
+$(blkid /dev/nvme0n1p2 | cut -d ' ' -f 3 | tr -d '"') swap  swap  defaults 0 0
 $(blkid /dev/nvme0n1p3 | cut -d ' ' -f 3 | tr -d '"') / $FSYS rw,noatime,discard,commit=60,barrier=0 0 1
-$(blkid /dev/nvme0n1p4 | cut -d ' ' -f 3 | tr -d '"') /home $FSYS rw,discard,commit=60,barrier=0 0 2
 EOF
 
 # For a removable drive I include the line:
