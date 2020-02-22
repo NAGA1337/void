@@ -72,7 +72,7 @@ do
       break
       ;;
     'nvme')
-      DEVNAME='/dev/nvme'
+      DEVNAME='/dev/nvme0n1'
       break
       ;;
     *)
@@ -88,12 +88,12 @@ echo 'FILE SYSTEM TYPE SELECTION'
 echo ''
 echo ''
 PS3='Select the file system type to format partitions: '
-filesystems=('ext3' 'ext4' 'xfs')
+filesystems=('btrfs' 'ext4' 'xfs')
 select filesysformat in "${filesystems[@]}"
 do
   case $filesysformat in
-    'ext3')
-      FSYS='ext3'
+    'btrfs')
+      FSYS='btrfs'
       break
       ;;
     'ext4')
@@ -467,4 +467,4 @@ echo '####################################################'
 echo '######## Void Linux Installed Successfully! ########'
 echo '####################################################'
 
-poweroff
+reboot
