@@ -51,7 +51,7 @@ KEYMAP='fi' # Define keyboard layout: us or br-abnt2 (include more options)
 FONT='Lat2-Terminus16' # Set type face for terminal before X server starts
 TTYS=2 # Amount of ttys which should be setup
 # LANG='en_US.UTF-8' # I guess this one only necessary in glibc installs
-PKG_LIST='base-system void-repo-nonfree nvidia intel-ucode-20191115_2.x86_64 git grub' # Install this packages (add more to your taste)
+PKG_LIST='base-system void-repo-nonfree git grub' # Install this packages (add more to your taste)
 # Tip: In this step, python3 is a dependency from ufw...no need to install this otherwise
 ############################
 ######## HEADER END ########
