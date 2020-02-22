@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Name: Void Linux Installer
+# Authors: Marcílio Nascimento <marcilio.mcn at gmail.com>
+# First Release: 2019, March
+# Description: Alternative LEAN install script that replaces the standard Void Linux installer.
+# License: MIT
+# Version: 202002.02
+
 # Exit immediately if a command exits with a non-zero exit status
 set -e
 
@@ -26,7 +33,7 @@ REPO='http://alpha.de.repo.voidlinux.org'
 
 # PARTITIONS SIZE (M for Megabytes, G for Gigabytes)
 EFISIZE='1G'
-SWAPSIZE='6G'
+SWAPSIZE='10G'
 # BOOTSIZE='512M' # 512MB for /boot should be sufficient to host 7 to 8 kernel versions
 ROOTSIZE='10G'
 
@@ -36,15 +43,15 @@ ROOTSIZE='10G'
 # LV[home]="1G"
 
 # SETTINGS
-USERNAME='void' # Set your username
-HOSTNAME='master' # Pick your favorite name
+USERNAME='wompsi' # Set your username
+HOSTNAME='voidi' # Pick your favorite name
 HARDWARECLOCK='UTC' # Set RTC (Real Time Clock) to UTC or localtime
 TIMEZONE='Europe/Helsinki' # Set which region on Earth the user is
 KEYMAP='fi' # Define keyboard layout: us or br-abnt2 (include more options)
 FONT='Lat2-Terminus16' # Set type face for terminal before X server starts
 TTYS=2 # Amount of ttys which should be setup
 # LANG='en_US.UTF-8' # I guess this one only necessary in glibc installs
-PKG_LIST='base-system git nano neofetch bash-completion grub' # Install this packages (add more to your taste)
+PKG_LIST='base-system git grub' # Install this packages (add more to your taste)
 # Tip: In this step, python3 is a dependency from ufw...no need to install this otherwise
 ############################
 ######## HEADER END ########
@@ -72,7 +79,7 @@ do
       break
       ;;
     'nvme')
-      DEVNAME='/dev/nvme0n1'
+      DEVNAME='/dev/nvme'
       break
       ;;
     *)
@@ -260,7 +267,7 @@ clear
 echo ''
 echo 'Installing Void Linux files'
 echo ''
-env XBPS_ARCH=x86_64 xbps-install -Sy -R ${REPO}/current -r /mnt $PKG_LIST
+env XBPS_ARCH=x86_64-musl xbps-install -Sy -R ${REPO}/current/musl -r /mnt $PKG_LIST
 
 # Upon completion of the install, we set up our chroot jail, and chroot into our mounted filesystem:
 mount -t proc proc /mnt/proc
@@ -439,7 +446,7 @@ done
 
 echo '%wheel ALL=(ALL) ALL, NOPASSWD: /usr/bin/halt, /usr/bin/poweroff, /usr/bin/reboot, /usr/bin/shutdown, /usr/bin/zzz, /usr/bin/ZZZ, /usr/bin/mount, /usr/bin/umount' > /etc/sudoers.d/99_wheel
 
-echo 'repository=${REPO}/current' > /etc/xbps.d/00-repository-main.conf
+echo 'repository=${REPO}/current/musl' > /etc/xbps.d/00-repository-main.conf
 xbps-install -Su
 
 mkdir /etc/sysctl.d/
@@ -467,4 +474,4 @@ echo '####################################################'
 echo '######## Void Linux Installed Successfully! ########'
 echo '####################################################'
 
-reboot
+poweroff
